@@ -1,6 +1,6 @@
 {
   "name": "ng-http-sui",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,6 +8,12 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
+  },
+  "author": "Michael Wanyoike",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:brandiqa/ng-http-sui.git"
   },
   "private": true,
   "dependencies": {
