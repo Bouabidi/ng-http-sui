@@ -11,7 +11,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class PostsService {
+export class PostService {
 
   private postsUrl = 'https://jsonplaceholder.typicode.com/posts';
 
