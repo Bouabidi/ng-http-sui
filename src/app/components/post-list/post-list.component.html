@@ -11,10 +11,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>1</td>
-      <td>1</td>
-      <td>Post Title</td>
+    <tr *ngFor="let p of posts">
+      <td>{{ p.id }}</td>
+      <td>{{ p.userId }}</td>
+      <td>{{ p.title }}</td>
     </tr>
   </tbody>
 </table>
