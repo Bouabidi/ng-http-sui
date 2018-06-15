@@ -6,12 +6,14 @@ import { SuiModule } from 'ng2-semantic-ui';
 import { AppComponent } from './app.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { PostComponent } from './components/post/post.component';
+import { PostFormComponent } from './components/post-form/post-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostListComponent,
-    PostComponent
+    PostComponent,
+    PostFormComponent
   ],
   imports: [
     BrowserModule,
