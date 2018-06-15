@@ -15,8 +15,9 @@ export class PostListComponent implements OnInit {
   total = 0;
   selectedPage = 1;
   start = 0;
-  limit = 12;
+  limit = 10;
   end = this.limit;
+  loading = false;
 
   constructor(private postService: PostService) { }
 
@@ -25,11 +26,13 @@ export class PostListComponent implements OnInit {
   }
 
   getPosts() : void {
+    this.loading = true;
     this.postService.getPosts()
       .subscribe(posts => {
         this.total = posts.length;
         this.allPosts = posts;
         this.posts = this.allPosts.slice(this.start, this.end);
+        this.loading = false;
       });
   }
 

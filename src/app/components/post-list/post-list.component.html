@@ -2,32 +2,33 @@
   Post List
 </h2>
 <hr>
-<table class="ui celled table">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>UserId</th>
-      <th>Title</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let p of posts">
-      <td>{{ p.id }}</td>
-      <td>{{ p.userId }}</td>
-      <td>{{ p.title }}</td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <th colspan="3">
-        <sui-pagination [collectionSize]="total"
-                        [pageSize]="limit"
-                        [hasNavigationLinks]="navigation"
-                        [hasBoundaryLinks]="boundary"
-                        [(page)]="selectedPage"
-                         (pageChange)="pageChange()">
-        </sui-pagination>
-      </th>
-    </tr>
-  </tfoot>
-</table>
+<div class="ui segment">
+  <sui-dimmer class="inverted" [(isDimmed)]="loading">
+    <div class="ui text loader">Loading</div>
+  </sui-dimmer>
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>UserId</th>
+        <th>Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of posts">
+        <td>{{ p.id }}</td>
+        <td>{{ p.userId }}</td>
+        <td>{{ p.title }}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="3">
+          <sui-pagination [collectionSize]="total" [pageSize]="limit" [hasNavigationLinks]="navigation" [hasBoundaryLinks]="boundary"
+            [(page)]="selectedPage" (pageChange)="pageChange()">
+          </sui-pagination>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
