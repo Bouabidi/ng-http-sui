@@ -2,16 +2,16 @@
   <div class="header item">
     Angular 6 Demo
   </div>
-  <a class="active item">
+  <a class="active item" href="posts">
     Post List
   </a>
-  <a class="item">
+  <a class="item" href="post/create">
     Create Posts
   </a>
 </div>
 
 <div class="ui container">
   <div class="ui basic segment">
-    <app-post-list></app-post-list>
+    <router-outlet></router-outlet>
   </div>
 </div>
