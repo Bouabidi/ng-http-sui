@@ -25,6 +25,41 @@ export class PostService {
       );
   }
 
+  getPost(id: number): Observable<Post> {
+    const url = `${this.postsUrl}/${id}`;
+    return this.http.get<Post>(url).pipe(
+      tap(_ => console.log(`fetched post id=${id}`)),
+      catchError(this.handleError<Post>(`getPost id=${id}`))
+    );
+  }
+
+  /** POST: add a new post to the server */
+  addPost(newPost: Post): Observable<Post> {
+    return this.http.post<Post>(this.postsUrl, newPost, httpOptions).pipe(
+      tap((post: Post) => console.log(`added post w/ id=${post.id}`)),
+      catchError(this.handleError<Post>('addPost'))
+    );
+  }
+
+  /** DELETE: delete the post from the server */
+  deletePost(post: Post | number): Observable<Post> {
+    const id = typeof post === 'number' ? post : post.id;
+    const url = `${this.postsUrl}/${id}`;
+
+    return this.http.delete<Post>(url, httpOptions).pipe(
+      tap(_ => console.log(`deleted post id=${id}`)),
+      catchError(this.handleError<Post>('deletePost'))
+    );
+  }
+
+  /** UPDATE: update selected post on the server */
+  updatePost(post: Post): Observable<any> {
+    return this.http.put(this.postsUrl, post, httpOptions).pipe(
+      tap(_ => console.log(`updated post id=${post.id}`)),
+      catchError(this.handleError<any>('updatePost'))
+    );
+  }
+
   /**
   * Handle Http operation that failed.
   * Let the app continue.
