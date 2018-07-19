@@ -54,7 +54,9 @@ export class PostService {
 
   /** UPDATE: update selected post on the server */
   updatePost(post: Post): Observable<any> {
-    return this.http.put(this.postsUrl, post, httpOptions).pipe(
+    const url = `${this.postsUrl}/${post.id}`;
+
+    return this.http.put(url, post, httpOptions).pipe(
       tap(_ => console.log(`updated post id=${post.id}`)),
       catchError(this.handleError<any>('updatePost'))
     );
