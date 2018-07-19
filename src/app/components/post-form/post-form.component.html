@@ -3,26 +3,26 @@
 </h2>
 <hr>
 <div class="ui basic segment" *ngIf="post">
-  <div class="ui form">
+  <form class="ui form" (ngSubmit)="onSubmit()" #postForm="ngForm">
     <div class="fields">
       <div class="field">
         <label>Id</label>
-        <input type="number" [(ngModel)]="post.id" disabled>
+        <input type="number" [(ngModel)]="post.id" id="id" name="id" disabled>
       </div>
       <div class="field">
         <label>User Id</label>
-        <input type="number" [(ngModel)]="post.userId">
+        <input type="number" [(ngModel)]="post.userId" id="userId" name="userId" required>
       </div>
     </div>
     <div class="field">
       <label>Title</label>
-      <input type="text" [(ngModel)]="post.title">
+      <input type="text" [(ngModel)]="post.title" id="title" name="title" required>
     </div>
     <div class="field">
       <label>Body</label>
-      <textarea rows="5" [(ngModel)]="post.body"></textarea>
+      <textarea rows="5" [(ngModel)]="post.body" id="body" name="body" required></textarea>
     </div>
-    <button class="ui primary button" (click)="save()">Save</button>
-    <button class="ui button" (click)="goBack()">Cancel</button>
-  </div>
+    <button type="submit" class="ui primary button" [disabled]="!postForm.form.valid">Save</button>
+    <button type="button" class="ui button" (click)="goBack()">Cancel</button>
+  </form>
 </div>

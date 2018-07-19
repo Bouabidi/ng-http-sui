@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 })
 export class PostFormComponent implements OnInit {
 
-  @Input() post:Post;
+  post:Post;
   create:boolean = false;
 
   constructor(
@@ -27,15 +27,17 @@ export class PostFormComponent implements OnInit {
   getPost() {
     const id = +this.route.snapshot.paramMap.get('id');
     if(id) {
+      console.log('setting to editmode');
       this.postService.getPost(id)
         .subscribe(post => this.post = post);
     } else {
+      console.log('setting to create mode');
       this.create = true;
       this.post = new Post();
     }
   }
 
-  save() {
+  onSubmit() {
     if(this.create) {
       this.postService.addPost(this.post)
         .subscribe(() => this.goBack());
