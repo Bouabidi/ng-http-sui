@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 export class PostFormComponent implements OnInit {
 
   post:Post;
-  create:boolean = false;
+  submitText:String = "Save";
 
   constructor(
     private route: ActivatedRoute,
@@ -27,22 +27,30 @@ export class PostFormComponent implements OnInit {
   getPost() {
     const id = +this.route.snapshot.paramMap.get('id');
     if(id) {
-      console.log('setting to editmode');
+      console.log(`edit existing post ${id}`);
       this.postService.getPost(id)
-        .subscribe(post => this.post = post);
+        .subscribe(post => this.post = post)
+        this.submitText = "Update";
     } else {
-      console.log('setting to create mode');
-      this.create = true;
+      console.log('create new post');
       this.post = new Post();
+      this.submitText = "Create";
     }
   }
 
   onSubmit() {
-    if(this.create) {
+    if(this.post.id) { // Update Existing Post
+      this.postService.updatePost(this.post)
+        .subscribe(() => this.goBack());
+    } else { // Create New Post
       this.postService.addPost(this.post)
         .subscribe(() => this.goBack());
-    } else {
-      this.postService.updatePost(this.post)
+    }
+  }
+
+  onDelete() {
+    if(this.post.id) {
+      this.postService.deletePost(this.post)
         .subscribe(() => this.goBack());
     }
   }
