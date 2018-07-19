@@ -19,7 +19,7 @@
       <tr *ngFor="let p of posts">
         <td>{{ p.id }}</td>
         <td>{{ p.userId }}</td>
-        <td>{{ p.title }}</td>
+        <td><a href="post/{{p.id}}">{{ p.title }}</a></td>
         <td><a href="post/edit/{{p.id}}"><i class="edit icon"></i></a></td>
       </tr>
     </tbody>
