@@ -18,6 +18,7 @@ export class PostListComponent implements OnInit {
   limit = 10;
   end = this.limit;
   loading = false;
+  error: String;
 
   constructor(private postService: PostService) { }
 
@@ -33,7 +34,12 @@ export class PostListComponent implements OnInit {
         this.allPosts = posts;
         this.posts = this.allPosts.slice(this.start, this.end);
         this.loading = false;
-      });
+      },
+      (error) => {
+        this.error = error
+        this.loading = false;
+      }
+    );
   }
 
   public pageChange(page): void {

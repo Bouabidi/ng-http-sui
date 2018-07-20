@@ -57,7 +57,7 @@ export class PostFormComponent implements OnInit {
     } else { // Create New Post
       this.postService.addPost(this.post)
         .subscribe(
-        () => this.goPosts(),
+          () => this.gotoPosts(),
           error => this.handleError(error)
         );
     }
@@ -74,7 +74,7 @@ export class PostFormComponent implements OnInit {
     }
   }
 
-  goPosts() {
+  gotoPosts() {
     this.router.navigate(['/posts']);
   }
 

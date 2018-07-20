@@ -6,6 +6,11 @@
   <sui-dimmer class="inverted" [(isDimmed)]="loading">
     <div class="ui text loader">Loading</div>
   </sui-dimmer>
+  <div class="ui negative message {{ error ? 'visible' : 'hidden'}}">
+    <i class="close icon"></i>
+    <div class="header">An Error Occurred!</div>
+    <p>{{error}}</p>
+  </div>
   <table class="ui celled table">
     <thead>
       <tr>
@@ -26,7 +31,7 @@
     <tfoot>
       <tr>
         <th colspan="4">
-          <sui-pagination [collectionSize]="total" [pageSize]="limit" [hasNavigationLinks]="navigation" [hasBoundaryLinks]="boundary"
+          <sui-pagination [collectionSize]="total" [pageSize]="limit" [hasNavigationLinks]="true" [hasBoundaryLinks]="true"
             [(page)]="selectedPage" (pageChange)="pageChange()">
           </sui-pagination>
         </th>
