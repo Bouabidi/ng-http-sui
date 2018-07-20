@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import { Post } from '../models/post.model';
 
 const httpOptions = {
@@ -13,7 +14,7 @@ const httpOptions = {
 })
 export class PostService {
 
-  private postsUrl = 'https://jsonplaceholder.typicode.com/posts';
+  private postsUrl = environment.postsUrl || 'https://jsonplaceholder.typicode.com/posts';
 
   constructor(private http: HttpClient) { }
 
