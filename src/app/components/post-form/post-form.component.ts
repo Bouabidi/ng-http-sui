@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Post } from '../../models/post.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../../services/post.service';
 import { Location } from '@angular/common';
 
@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 })
 export class PostFormComponent implements OnInit {
 
-  post:Post;
+  @Input() post:Post;
   loading:boolean;
   submitText:String = "Save";
   error:String;
@@ -19,7 +19,8 @@ export class PostFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private postService: PostService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -56,7 +57,7 @@ export class PostFormComponent implements OnInit {
     } else { // Create New Post
       this.postService.addPost(this.post)
         .subscribe(
-          () => this.goBack(),
+        () => this.goPosts(),
           error => this.handleError(error)
         );
     }
@@ -71,6 +72,10 @@ export class PostFormComponent implements OnInit {
           error => this.handleError(error)
         );
     }
+  }
+
+  goPosts() {
+    this.router.navigate(['/posts']);
   }
 
   goBack() {
