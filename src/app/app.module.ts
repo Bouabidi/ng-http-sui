@@ -9,8 +9,7 @@ import { AppComponent } from './app.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { PostComponent } from './components/post/post.component';
 import { PostFormComponent } from './components/post-form/post-form.component';
-import { LogInterceptor } from './log.interceptor';
-import { CacheInterceptor } from './cache.interceptor';
+import { httpInterceptorProviders } from './http-interceptors';
 
 const appRoutes: Routes = [
   { path: 'posts', component: PostListComponent },
@@ -34,9 +33,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     SuiModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass:  LogInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true }
-  ],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
