@@ -15,6 +15,16 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 3. Start app with `npm start` or `ng serve`
 4. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+Take note that the responses returned by the online REST service are fake i.e. data won't actually be persisted.
+
+To run locally, install the following `json-server` globally:
+
+```bash
+npm install -g json-server
+```
+
+Start the json-server first: `json-server --watch data/db.json`. Then start the Angular app using a local environment like this `ng serve -c local`. This will make the application use data from the local json-server API. In this mode, data will be persisted in the `data/db.json` file.
+
 ## License
 
 The MIT License (MIT) Copyright (c)
