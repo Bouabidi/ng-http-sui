@@ -3,6 +3,9 @@
 </h2>
 <hr>
 <div class="ui segment">
+  <sui-dimmer class="inverted" [(isDimmed)]="loading">
+    <div class="ui text loader">Loading...</div>
+  </sui-dimmer>
   <h3 class="ui header">
     {{ post?.title }}
   </h3>

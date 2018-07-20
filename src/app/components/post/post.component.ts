@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 export class PostComponent implements OnInit {
 
   post: Post;
+  loading: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,13 +25,18 @@ export class PostComponent implements OnInit {
   }
 
   getPost() {
+    this.loading = true;
     const id = +this.route.snapshot.paramMap.get('id');
     if (id) {
       console.log(`Found post ${id}`);
       this.postService.getPost(id)
-        .subscribe(post => this.post = post)
+        .subscribe(post => {
+          this.post = post
+          this.loading = false;
+        })
     } else {
       console.log('Selected post not found');
+      this.loading = false;
       this.location.back();
     }
   }
