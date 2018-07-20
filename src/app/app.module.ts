@@ -2,13 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SuiModule } from 'ng2-semantic-ui';
 
 import { AppComponent } from './app.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { PostComponent } from './components/post/post.component';
 import { PostFormComponent } from './components/post-form/post-form.component';
+import { LogInterceptor } from './log.interceptor';
 
 const appRoutes: Routes = [
   { path: 'posts', component: PostListComponent },
@@ -32,7 +33,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     SuiModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass:  LogInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
