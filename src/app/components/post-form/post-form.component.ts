@@ -14,6 +14,7 @@ export class PostFormComponent implements OnInit {
   post:Post;
   loading:boolean;
   submitText:String = "Save";
+  error:String;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,21 +49,36 @@ export class PostFormComponent implements OnInit {
     this.loading = true;
     if(this.post.id) { // Update Existing Post
       this.postService.updatePost(this.post)
-        .subscribe(() => this.goBack());
+        .subscribe(
+          () => this.goBack(),
+          error => this.handleError(error)
+      );
     } else { // Create New Post
       this.postService.addPost(this.post)
-        .subscribe(() => this.goBack());
+        .subscribe(
+          () => this.goBack(),
+          error => this.handleError(error)
+        );
     }
   }
 
   onDelete() {
+    this.loading = true;
     if(this.post.id) {
       this.postService.deletePost(this.post)
-        .subscribe(() => this.goBack());
+        .subscribe(
+          () => this.goBack(),
+          error => this.handleError(error)
+        );
     }
   }
 
   goBack() {
     this.location.back();
+  }
+
+  handleError(error) {
+    this.error = error;
+    this.loading = false;
   }
 }

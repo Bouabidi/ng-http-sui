@@ -6,7 +6,7 @@
   <sui-dimmer class="inverted" [(isDimmed)]="loading">
     <div class="ui text loader">Please wait...</div>
   </sui-dimmer>
-  <form class="ui form" (ngSubmit)="onSubmit()" #postForm="ngForm" *ngIf="post">
+  <form class="ui form {{error ? 'error' : error}}" (ngSubmit)="onSubmit()" #postForm="ngForm" *ngIf="post">
     <div class="fields">
       <div class="field">
         <label>Id</label>
@@ -24,6 +24,10 @@
     <div class="field">
       <label>Body</label>
       <textarea rows="5" [(ngModel)]="post.body" id="body" name="body" required></textarea>
+    </div>
+    <div class="ui error message">
+      <div class="header">An Error Occurred!</div>
+      <p>{{error}}</p>
     </div>
     <div class="ui buttons">
       <button type="submit" class="ui button green" [disabled]="!postForm.form.valid">{{submitText}}</button>

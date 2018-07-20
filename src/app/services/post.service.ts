@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Post } from '../models/post.model';
@@ -55,6 +55,7 @@ export class PostService {
   /** UPDATE: update selected post on the server */
   updatePost(post: Post): Observable<any> {
     const url = `${this.postsUrl}/${post.id}`;
+    // const url = `${this.postsUrl}`; // Uncomment this to demonstrate error handling
 
     return this.http.put(url, post, httpOptions).pipe(
       tap(_ => console.log(`updated post id=${post.id}`)),
@@ -78,7 +79,10 @@ export class PostService {
       console.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
-      return of(result as T);
+      // return of(result as T);
+
+      // Tell user that an error has occurred
+      return throwError(`${operation} failed: ${error.message}`);
     };
   }
 }
