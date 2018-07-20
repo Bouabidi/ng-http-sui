@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 export class PostFormComponent implements OnInit {
 
   post:Post;
+  loading:boolean;
   submitText:String = "Save";
 
   constructor(
@@ -25,20 +26,26 @@ export class PostFormComponent implements OnInit {
   }
 
   getPost() {
+    this.loading = true;
     const id = +this.route.snapshot.paramMap.get('id');
     if(id) {
       console.log(`edit existing post ${id}`);
       this.postService.getPost(id)
-        .subscribe(post => this.post = post)
-        this.submitText = "Update";
+        .subscribe(post => {
+          this.post = post;
+          this.submitText = "Update";
+          this.loading = false;
+        });
     } else {
       console.log('create new post');
       this.post = new Post();
       this.submitText = "Create";
+      this.loading = false;
     }
   }
 
   onSubmit() {
+    this.loading = true;
     if(this.post.id) { // Update Existing Post
       this.postService.updatePost(this.post)
         .subscribe(() => this.goBack());

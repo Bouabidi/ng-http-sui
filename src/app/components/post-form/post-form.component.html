@@ -2,8 +2,11 @@
   Post Form
 </h2>
 <hr>
-<div class="ui basic segment" *ngIf="post">
-  <form class="ui form" (ngSubmit)="onSubmit()" #postForm="ngForm">
+<div class="ui basic segment">
+  <sui-dimmer class="inverted" [(isDimmed)]="loading">
+    <div class="ui text loader">Please wait...</div>
+  </sui-dimmer>
+  <form class="ui form" (ngSubmit)="onSubmit()" #postForm="ngForm" *ngIf="post">
     <div class="fields">
       <div class="field">
         <label>Id</label>
